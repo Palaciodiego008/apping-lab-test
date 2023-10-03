@@ -2,7 +2,8 @@
   <div class="user-list">
     <h2>Lista de Usuarios</h2>
     <div class="search-container">
-      <input v-model="searchText" @input="filterUsers" @keydown.enter="searchUsers" placeholder="Buscar por nombre o correo electrónico" />
+      <input v-model="searchText" @input="filterUsers" @keydown.enter="searchUsers"
+        placeholder="Buscar por nombre o correo electrónico" />
       <button @click="searchUsers">Buscar</button>
     </div>
 
