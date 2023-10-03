@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from './router'; // Asegúrate de que esta importación sea correcta
+import router from './router';
 import { setupApp } from './pinia';
 
 const app = createApp(App);
