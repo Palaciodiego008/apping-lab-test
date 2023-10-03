@@ -6,12 +6,12 @@ export const useUserStore = defineStore('user', {
     loading: false,
   }),
   actions: {
-    async fetchUsers() {
+    async fetchUsers(page) {
       this.loading = true;
       try {
-        const response = await fetch('https://reqres.in/api/users');
+        const response = await fetch(`https://reqres.in/api/users?page=${page}`);
         const data = await response.json();
-        this.userList = data.data;
+        this.userList = [...data.data];
         console.log('Users fetched:', data.data);
       } catch (error) {
         console.error('Error fetching users:', error);
