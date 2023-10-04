@@ -1,10 +1,10 @@
 <template>
   <div class="user-list">
-    <h2>Lista de Usuarios</h2>
+    <h2>User List</h2>
     <div class="search-container">
       <input v-model="searchText" @input="filterUsers" @keydown.enter="searchUsers"
         placeholder="Buscar por nombre o correo electrónico" />
-      <button @click="searchUsers">Buscar</button>
+      <button @click="searchUsers">Search</button>
     </div>
 
     <div v-if="error" class="error-message">{{ error }}</div>
@@ -24,10 +24,10 @@
       </li>
     </ul>
     <div v-else-if="searchText.length > 0">
-      <p>No se han encontrado usuarios.</p>
+      <p>There are not results</p>
     </div>
     <div v-else>
-      <p>Ingresa un término de búsqueda para encontrar usuarios.</p>
+      <p>Enter a search term to find users.</p>
     </div>
   </div>
 </template>
@@ -59,7 +59,7 @@ export default defineComponent({
       }
     });
 
-    // Filtrar usuarios por nombre o correo electrónico
+    // Filter users by name or e-mail
     const filteredUsers = computed(() => {
       const query = searchText.value.toLowerCase();
       return userList.value.filter(
@@ -70,29 +70,25 @@ export default defineComponent({
       );
     });
 
-    // Función para filtrar usuarios al hacer clic en el botón de búsqueda
+    // Function to filter users when clicking on the search button
     const filterUsers = () => {
       if (searchText.value) {
-        // Aplicar filtro solo si hay texto en el campo de búsqueda
         userList.value = filteredUsers.value;
       } else {
-        // Si el campo de búsqueda está vacío, mostrar la lista original
         userList.value = userStore.userList;
       }
     };
 
-    // Función para buscar usuarios al presionar Enter en el campo de búsqueda
+    
     const searchUsers = () => {
       if (searchText.value) {
-        // Realizar la búsqueda solo si hay texto en el campo de búsqueda
         filterUsers();
       } else {
-        // Si el campo de búsqueda está vacío, mostrar un mensaje
         userList.value = [];
       }
     };
 
-    // Mostrar la lista filtrada, la lista original o un mensaje según el campo de búsqueda
+    // Shw users based on search text
     const displayedUsers = computed(() => {
       if (searchText.value) {
         return filteredUsers.value.length > 0 ? filteredUsers.value : [];
